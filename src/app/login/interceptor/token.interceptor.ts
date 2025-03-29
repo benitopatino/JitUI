@@ -5,8 +5,7 @@ import { LoginService } from '../login-service/login.service';
 export const tokenInterceptorFn: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem(LoginService.JitTokenSessionName); // or localStorage
 
-  const isAuthRoute =
-    req.url.includes('/auth/login') || req.url.includes('/auth/register');
+  const isAuthRoute = req.url.includes('/auth/login') || req.url.includes('/auth/register');
 
   if (token && !isAuthRoute) {
     const cloned = req.clone({
@@ -15,7 +14,6 @@ export const tokenInterceptorFn: HttpInterceptorFn = (req, next) => {
       },
     });
 
-    console.log('🛡️ Interceptor attached token:', cloned.headers.get('Authorization'));
     return next(cloned);
   }
 

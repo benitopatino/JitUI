@@ -21,21 +21,13 @@ export class LoginFormComponent {
   constructor(private loginService: LoginService, private newsfeedService: NewsfeedService) { }
 
   onSubmit(login: Login): void {
-    console.log(login);
     this.loginService
       .login(login)
       .subscribe(
         (authResponse) => {
-          console.log(authResponse.isAuthenticated)
-          console.log(localStorage.getItem(LoginService.JitTokenSessionName));
-          this.newsfeedService
-            .getNewsfeedItems()
-            .subscribe((items) => { console.log(items) })
-        })
+          // handle form when credentials are incorrect
 
-    this.newsfeedService
-      .getNewsfeedItems()
-      .subscribe((items) => { console.log(items) })
+        });
 
   }
 
