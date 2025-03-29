@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Login } from '../models/login';
 import { AuthResponse } from '../models/auth-response';
 const httpOptions = {
@@ -21,7 +21,13 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(login: Login): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.API_URL, login, httpOptions);
+    return this.http.post<AuthResponse>(this.API_URL, login, httpOptions)
+      .pipe(
+        tap((response: AuthResponse) => {
+          if (response.isAuthenticated && response.token)
+            localStorage.setItem('jitAuthToken', response.token);
+        })
+      );
   }
 
 

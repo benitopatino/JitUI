@@ -19,12 +19,12 @@ export class LoginFormComponent {
 
   constructor(private loginService: LoginService) { }
 
-  onSubmit(login: Login) {
+  onSubmit(login: Login): void {
     console.log(login);
     this.loginService
       .login(login)
       .subscribe(
-        (authResponse) => (console.log(authResponse)))
+        (authResponse) => (console.log(authResponse.isAuthenticated)))
   }
 
 
