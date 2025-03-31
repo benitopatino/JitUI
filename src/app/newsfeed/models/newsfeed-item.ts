@@ -1,6 +1,6 @@
 export interface NewsfeedItem {
 
-	id: string,
+	id?: string,
 	content: string,
 	dateCreated: Date,
 	authorUserId: string,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NewsfeedItem } from '../models/newsfeed-item';
 import { Input } from '@angular/core';
 @Component({
@@ -8,7 +8,7 @@ import { Input } from '@angular/core';
   styleUrl: './newsfeed-item.component.css'
 })
 export class NewsfeedItemComponent {
-  @Input() newsfeedItem: NewsfeedItem;
+  @Input() newsfeedItem!: NewsfeedItem;
   constructor() { };
 
 
