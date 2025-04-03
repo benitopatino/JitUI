@@ -20,7 +20,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(register: Register): Observable<any>{
-    return this.http.post(this.API_URL, this.register, httpOptions);
+    return this.http.post(this.API_URL, register, httpOptions);
   }
 
 }
