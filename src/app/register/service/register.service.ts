@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { register } from '../models/register';
+import { Register } from '../models/register';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +19,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  register(register: register): Observable<any>{
+  register(register: Register): Observable<any>{
     return this.http.post(this.API_URL, this.register, httpOptions);
   }
 
