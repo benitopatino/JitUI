@@ -19,5 +19,6 @@ export class RegisterFormComponent {
     password:'',
   }
 
+  constructor(private registerService: RegisterService){}
 
 }
