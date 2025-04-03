@@ -21,4 +21,13 @@ export class RegisterFormComponent {
 
   constructor(private registerService: RegisterService){}
 
+
+  onSubmit(register: Register): void{
+    this.registerService.register(register)
+      .subscribe((response:Response)=>{
+        console.log(response.status);
+      });
+  }
+
+
 }
