@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Register } from '../models/register';
 import { RegisterService } from '../service/register.service';
 import { FormsModule } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpStatusCode } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-form',
   imports: [FormsModule],
@@ -20,11 +21,12 @@ export class RegisterFormComponent {
     password:'',
   }
 
-  constructor(private registerService: RegisterService){}
+  constructor(private registerService: RegisterService, private router: Router){}
   onSubmit(register: Register): void{
     this.registerService.register(register)
       .subscribe((response:HttpResponse<any>)=>{
-        console.log(response.status);
+        if(response.status == HttpStatusCode.Ok)
+          this.router.navigate(['/login']);
       });
   }
 }
