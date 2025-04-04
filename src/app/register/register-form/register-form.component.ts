@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Login } from '../../login/models/login';
 import { Register } from '../models/register';
 import { RegisterService } from '../service/register.service';
 import { FormsModule } from '@angular/forms';
-
+import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-register-form',
   imports: [FormsModule],
@@ -22,14 +21,10 @@ export class RegisterFormComponent {
   }
 
   constructor(private registerService: RegisterService){}
-
-
   onSubmit(register: Register): void{
     this.registerService.register(register)
-      .subscribe((response:Response)=>{
+      .subscribe((response:HttpResponse<any>)=>{
         console.log(response.status);
       });
   }
-
-
 }
