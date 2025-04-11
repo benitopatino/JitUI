@@ -5,12 +5,16 @@
         <img src="assets/jitLogo.png" class="mx-auto d-block" width="150" height="150" alt="logo"/>
       </div>
       <h2 class="display-5 text-center mb-4"></h2>
-      <form class="w-100" #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+      <form class="w-100" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
         <!-- First and Last Name Inline -->
         <div class="row mb-3">
           <div class="col">
             <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" [(ngModel)]="register.firstname" name="firstname" id="firstname" placeholder="John">
+            <input type="text" class="form-control" [(ngModel)]="register.firstname" required name="firstname"  #firstname="ngModel" id="firstname" placeholder="John">
+            <span class="text-danger"
+            *ngIf="(firstname.touched || myForm.submitted) && firstname.errors?.['required']">
+            Name is required
+        </span>
           </div>
           <div class="col">
             <label for="lastName" class="form-label">Last Name</label>
