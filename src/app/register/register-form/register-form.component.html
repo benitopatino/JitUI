@@ -12,13 +12,17 @@
             <label for="firstName" class="form-label">First Name</label>
             <input type="text" class="form-control" [(ngModel)]="register.firstname" required name="firstname"  #firstname="ngModel" id="firstname" placeholder="John">
             <span class="text-danger"
-            *ngIf="(firstname.touched || myForm.submitted) && firstname.errors?.['required']">
-            Name is required
-        </span>
+              *ngIf="(firstname.touched || myForm.submitted) && firstname.errors?.['required']">
+              First Name is required
+            </span>
           </div>
           <div class="col">
             <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastname" [(ngModel)]="register.lastname" name="lastname" placeholder="Doe">
+            <input type="text" class="form-control" id="lastname" [(ngModel)]="register.lastname"  #lastname="ngModel" name="lastname" placeholder="Doe" required>
+            <span class="text-danger"
+            *ngIf="(firstname.touched || myForm.submitted) && firstname.errors?.['required']">
+            Last name is required
+          </span>
           </div>
         </div>
 
