@@ -25,7 +25,7 @@
           </span>
           </div>
         </div>
-        
+
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
@@ -43,7 +43,15 @@
         <!-- Password -->
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" [(ngModel)]="register.password" name="password" class="form-control">
+          <input type="password" id="password" [(ngModel)]="register.password" name="password" class="form-control" required  minlength="6" #password="ngModel">
+          <span class="text-danger"
+          *ngIf="(password.touched || myForm.submitted) && password.errors?.['required']">
+          Password is required
+        </span>
+        <span class="text-danger"
+        *ngIf="(password.touched || myForm.submitted) && password.errors?.['minlength']">
+        Password length must be at least 6 characters
+      </span>
         </div>
 
         <!-- Submit Button -->
