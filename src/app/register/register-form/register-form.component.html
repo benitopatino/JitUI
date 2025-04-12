@@ -25,11 +25,19 @@
           </span>
           </div>
         </div>
-
+        
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" [(ngModel)]="register.email" id="email" name="email" placeholder="example@example.com">
+          <input type="email" class="form-control" [(ngModel)]="register.email" id="email" name="email" placeholder="example@example.com" #email="ngModel" required email>
+          <span class="text-danger"
+          *ngIf="(email.touched || myForm.submitted) && email.errors?.['required']">
+          Email is required
+        </span>
+        <span class="text-danger"
+        *ngIf="(email.invalid || myForm.submitted) && email.errors?.['email']">
+        Invalid email type
+      </span>
         </div>
 
         <!-- Password -->
