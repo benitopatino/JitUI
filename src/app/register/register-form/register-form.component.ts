@@ -33,9 +33,15 @@ export class RegisterFormComponent {
     // call register service
 
     this.registerService.register(this.register)
-      .subscribe((response:HttpResponse<any>)=>{
-        if(response.status == HttpStatusCode.Ok)
-          this.router.navigate(['/login']);
-      });
+      .subscribe({
+        next: (response: HttpResponse<any>)=>{
+          if(response.status == HttpStatusCode.Ok)
+            this.router.navigate(['/login']);
+        },
+        error: ()=>{
+          myForm.resetForm();
+          this.router.navigate(['/register'])
+        }
+      })
   }
 }
