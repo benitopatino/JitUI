@@ -14,7 +14,7 @@ import { NewsfeedService } from '../../newsfeed/service/newsfeed.service';
 export class LoginFormComponent {
 
   login: Login = {
-    username: '',
+    email: '',
     password: ''
   }
 
