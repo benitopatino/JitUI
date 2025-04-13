@@ -5,29 +5,53 @@
         <img src="assets/jitLogo.png" class="mx-auto d-block" width="150" height="150" alt="logo"/>
       </div>
       <h2 class="display-5 text-center mb-4"></h2>
-      <form class="w-100" #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+      <form class="w-100" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
         <!-- First and Last Name Inline -->
         <div class="row mb-3">
           <div class="col">
             <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" [(ngModel)]="register.firstname" name="firstname" id="firstname" placeholder="John">
+            <input type="text" class="form-control" [(ngModel)]="register.firstname" required name="firstname"  #firstname="ngModel" id="firstname" placeholder="John">
+            <span class="text-danger"
+              *ngIf="(firstname.touched || myForm.submitted) && firstname.errors?.['required']">
+              First Name is required
+            </span>
           </div>
           <div class="col">
             <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastname" [(ngModel)]="register.lastname" name="lastname" placeholder="Doe">
+            <input type="text" class="form-control" id="lastname" [(ngModel)]="register.lastname"  #lastname="ngModel" name="lastname" placeholder="Doe" required>
+            <span class="text-danger"
+            *ngIf="(lastname.touched || myForm.submitted) && lastname.errors?.['required']">
+            Last name is required
+          </span>
           </div>
         </div>
 
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" [(ngModel)]="register.email" id="email" name="email" placeholder="example@example.com">
+          <input type="email" class="form-control" [(ngModel)]="register.email" id="email" name="email" placeholder="example@example.com" #email="ngModel" required email>
+          <span class="text-danger"
+          *ngIf="(email.touched || myForm.submitted) && email.errors?.['required']">
+          Email is required
+        </span>
+        <span class="text-danger"
+        *ngIf="(email.invalid || myForm.submitted) && email.errors?.['email']">
+        Invalid email type
+      </span>
         </div>
 
         <!-- Password -->
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" [(ngModel)]="register.password" name="password" class="form-control">
+          <input type="password" id="password" [(ngModel)]="register.password" name="password" class="form-control" required  minlength="6" #password="ngModel">
+          <span class="text-danger"
+          *ngIf="(password.touched || myForm.submitted) && password.errors?.['required']">
+          Password is required
+        </span>
+        <span class="text-danger"
+        *ngIf="(password.touched || myForm.submitted) && password.errors?.['minlength']">
+        Password length must be at least 6 characters
+      </span>
         </div>
 
         <!-- Submit Button -->
