@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Login } from '../models/login';
 import { LoginService } from '../login-service/login.service';
@@ -20,13 +20,13 @@ export class LoginFormComponent {
 
   constructor(private loginService: LoginService, private newsfeedService: NewsfeedService) { }
 
-  onSubmit(login: Login): void {
+  onSubmit(myForm: NgForm): void {
     this.loginService
-      .login(login)
+      .login(this.login)
       .subscribe(
         (authResponse) => {
           // handle form when credentials are incorrect
-
+          
         });
 
   }
