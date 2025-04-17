@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Login } from '../models/login';
 import { AuthResponse } from '../models/auth-response';
@@ -26,16 +26,15 @@ export class LoginService {
   static readonly JitTokenSessionName: string = 'jitAuthToken';
   constructor(private http: HttpClient) { }
 
-  login(login: Login): Observable<AuthResponse> {
+  login(login: Login): Observable<HttpResponse<AuthResponse>> {
     this.dto.username = login.email;
     this.dto.password = login.password;
-    return this.http.post<AuthResponse>(this.API_URL, this.dto, httpOptions)
-      .pipe(
-        tap((response: AuthResponse) => {
-          if (response.isAuthenticated && response.token)
-            localStorage.setItem(LoginService.JitTokenSessionName, response.token);
-        })
-      );
+    return this.http.post<AuthResponse>(this.API_URL, this.dto, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      observe: 'response' as const
+    });
   }
 
 

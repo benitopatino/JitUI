@@ -5,6 +5,8 @@ import { Login } from '../models/login';
 import { LoginService } from '../login-service/login.service';
 import { NewsfeedService } from '../../newsfeed/service/newsfeed.service';
 import { CommonModule } from '@angular/common';
+import { HttpStatusCode, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -19,7 +21,7 @@ export class LoginFormComponent {
     password: ''
   }
 
-  constructor(private loginService: LoginService, private newsfeedService: NewsfeedService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   onSubmit(myForm: NgForm): void {
 
@@ -28,11 +30,20 @@ export class LoginFormComponent {
 
     this.loginService
       .login(this.login)
-      .subscribe(
-        (authResponse) => {
-          // handle form when credentials are incorrect
-          
-        });
+      .subscribe({
+        next: (response: HttpResponse<any>)=>{
+          if(response.status == HttpStatusCode.Ok)
+          {
+            localStorage.setItem(LoginService.JitTokenSessionName, response.body.token);
+            this.router.navigate(['/home'])
+          }
+
+        },
+        error: ()=>{
+          myForm.resetForm();
+          this.router.navigate(['/login'])
+        }
+      });
 
   }
 
