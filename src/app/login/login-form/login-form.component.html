@@ -12,13 +12,29 @@
 			<!-- Email -->
 				<div class="mb-3">
 					<label for="email" class="form-label">Email</label>
-					<input placeholder="example@test.com" class="form-control" type="email" name="email" [(ngModel)]="login.email"/>
+					<input placeholder="example@test.com" class="form-control" type="email" #email="ngModel" name="email" [(ngModel)]="login.email" required email/>
+					<span class="text-danger"
+					*ngIf="(email.touched || myForm.submitted) && email.errors?.['required']">
+					Email is required
+				  </span>
+				  <span class="text-danger"
+				  *ngIf="(email.invalid || myForm.submitted) && email.errors?.['email']">
+				  Invalid email type
+				</span>
 				</div>
 	
 			<!-- Password -->
 				<div class="mb-3">
 					<label for="password" class="form-label">Password</label>
-					<input placeholder="Password" class="form-control" type="password" name="password" [(ngModel)]="login.password"/>
+					<input placeholder="Password" class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="login.password" required minlength="6"/>
+					<span class="text-danger"
+					*ngIf="(password.touched || myForm.submitted) && password.errors?.['required']">
+					Password is required
+				  </span>
+				  <span class="text-danger"
+				  *ngIf="(password.touched || myForm.submitted) && password.errors?.['minlength']">
+				  Password length must be at least 6 characters
+				</span>
 				</div>
 			<div class="d-grid">
 				<button type="submit" class="btn btn-primary">Login</button>
