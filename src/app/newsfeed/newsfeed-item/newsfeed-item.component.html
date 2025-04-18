@@ -1,6 +1,8 @@
-<div>
-	<h3>{{newsfeedItem.authorFullName}}</h3>
-	<p> {{newsfeedItem.content}} </p>
-	<i>{{newsfeedItem.dateCreated }}</i>
-</div>
 
+	<div class="card" style="width: 50%">
+		<div class="card-body">
+		  <h5 class="card-title">Card title</h5>
+		  <h6 class="card-subtitle mb-2 text-muted">{{newsfeedItem.authorFullName.toUpperCase()}}</h6>
+		  <p class="card-text">{{newsfeedItem.content}}</p>
+		</div>
+	  </div>

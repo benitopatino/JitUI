@@ -1,3 +1,4 @@
 
-<p>newsfeed works!</p>
-<app-newsfeed-item class="item" *ngFor="let item of newsfeedItems" [newsfeedItem] = "item"/>
+<div class="container mx-auto">
+    <app-newsfeed-item *ngFor="let item of newsfeedItems" [newsfeedItem] = "item"/>
+</div>
