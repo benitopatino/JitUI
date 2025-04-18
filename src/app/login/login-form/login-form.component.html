@@ -1,16 +1,42 @@
 
 
-
-<div>
-	<h2>JIT Login</h2>
-	<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
-		<input placeholder="Email" type="text" name="username" [(ngModel)]="login.username"/>
-		<input placeholder="Password" type="password" name="password" [(ngModel)]="login.password"/>
-		<div>
-			<button type="submit">Login</button>
+<div class="container min-vh-100 d-flex align-items-center">
+	<div class="row justify-content-center w-100">
+		<div class="col-md-6 col-lg-5 mx-auto">
+			<div>
+				<img src="assets/jitLogo.png" class="mx-auto d-block" width="150" height="150" alt="logo"/>
+			</div>
+		<h2 class="display-5 text-center mb-4">Login</h2>
+		<form #myForm="ngForm" class="w-100" (ngSubmit)="onSubmit(myForm)">
+		
+			<!-- Email -->
+				<div class="mb-3">
+					<label for="email" class="form-label">Email</label>
+					<input placeholder="example@test.com" class="form-control" type="email" #email="ngModel" name="email" [(ngModel)]="login.email" required email/>
+					<span class="text-danger"
+					*ngIf="(email.touched || myForm.submitted) && email.errors?.['required']">
+					Email is required
+				  </span>
+				  <span class="text-danger"
+				  *ngIf="(email.invalid || myForm.submitted) && email.errors?.['email']">
+				  Invalid email type
+				</span>
+				</div>
+	
+			<!-- Password -->
+				<div class="mb-3">
+					<label for="password" class="form-label">Password</label>
+					<input placeholder="Password" class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="login.password" required />
+					<span class="text-danger"
+					*ngIf="(password.touched || myForm.submitted) && password.errors?.['required']">
+					Password is required
+				  </span>
+				</div>
+			<div class="d-grid">
+				<button type="submit" class="btn btn-primary">Login</button>
+			</div>
+		</form>
 		</div>
-	</form>
-
-
-
+	</div>
 </div>
+
