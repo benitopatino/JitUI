@@ -26,15 +26,11 @@
 			<!-- Password -->
 				<div class="mb-3">
 					<label for="password" class="form-label">Password</label>
-					<input placeholder="Password" class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="login.password" required minlength="6"/>
+					<input placeholder="Password" class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="login.password" required />
 					<span class="text-danger"
 					*ngIf="(password.touched || myForm.submitted) && password.errors?.['required']">
 					Password is required
 				  </span>
-				  <span class="text-danger"
-				  *ngIf="(password.touched || myForm.submitted) && password.errors?.['minlength']">
-				  Password length must be at least 6 characters
-				</span>
 				</div>
 			<div class="d-grid">
 				<button type="submit" class="btn btn-primary">Login</button>
