@@ -1,8 +1,8 @@
 
-	<div class="card mb-3 shadow bg-white rounded p-2" style="min-height:200px">
+	<div class="card mb-3 shadow bg-white rounded p-2" style="min-height:120px">
 		<div class="card-body">
 		  	<p class="card-subtitle text-muted ">{{newsfeedItem.authorFullName.toUpperCase()}}</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam perspiciatis minus placeat impedit rerum, animi eaque quasi dolorum, consectetur, dolore doloribus expedita quidem eum sit suscipit tempora commodi architecto et.</p>
+			<p>{{newsfeedItem.content}}</p>
 			<p>{{ newsfeedItem.dateCreated | date: 'medium' }}</p>
 		</div>
 	</div>
