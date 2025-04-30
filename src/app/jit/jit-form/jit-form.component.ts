@@ -19,17 +19,24 @@ export class JitFormComponent {
   constructor(private jitService: JitService){}
 
   onSubmit(myForm: NgForm): void{
+
+    if(!myForm.valid)
+      return;
+
     this.jitService.create(this.jit)
     .subscribe({
+      
       next: (response: HttpResponse<any>)=>{
-        if(response.status == HttpStatusCode.Ok)
-          console.log('Jit Was passed and created via jit service')
+        this.clearForm(myForm);
       },
       error: ()=>{
-        myForm.resetForm();
-        console.log('Nothing was created')
-
+        this.clearForm(myForm);
       }
     })
+  }
+
+  clearForm(myForm: NgForm):void{
+    this.jit.content='';
+    myForm.resetForm();
   }
 }
