@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Jit } from '../models/jit';
 import { FormsModule, NgForm } from '@angular/forms';
+import { JitService } from '../service/jit.service';
+import { HttpResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-jit-form',
@@ -14,7 +16,20 @@ export class JitFormComponent {
     content:''
   }
 
+  constructor(private jitService: JitService){}
+
   onSubmit(myForm: NgForm): void{
-    console.log(this.jit);
+    this.jitService.create(this.jit)
+    .subscribe({
+      next: (response: HttpResponse<any>)=>{
+        if(response.status == HttpStatusCode.Ok)
+          console.log('Jit Was passed and created via jit service')
+      },
+      error: ()=>{
+        myForm.resetForm();
+        console.log('Nothing was created')
+
+      }
+    })
   }
 }
