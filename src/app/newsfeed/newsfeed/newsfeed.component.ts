@@ -3,9 +3,10 @@ import { NewsfeedItemComponent } from '../newsfeed-item/newsfeed-item.component'
 import { NewsfeedItem } from '../models/newsfeed-item';
 import { NewsfeedService } from '../service/newsfeed.service';
 import { CommonModule } from '@angular/common';
+import { JitFormComponent } from "../../jit/jit-form/jit-form.component";
 @Component({
   selector: 'app-newsfeed',
-  imports: [NewsfeedItemComponent, CommonModule],
+  imports: [NewsfeedItemComponent, CommonModule, JitFormComponent],
   templateUrl: './newsfeed.component.html',
   styleUrl: './newsfeed.component.css'
 })

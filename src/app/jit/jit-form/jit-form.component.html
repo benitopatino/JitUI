@@ -1,0 +1,8 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="form-group">
+        <textarea class="form-control" id="content" [(ngModel)]="jit.content" name="content"  required minlength="0" maxlength="220" rows="3" placeholder="Jit away!"></textarea>
+    </div>
+    <div class="mt-4 mb-4">
+        <button class="btn btn-success" [disabled]="!jit.content || jit.content.trim().length === 0">Post</button>    
+    </div>
+</form>
