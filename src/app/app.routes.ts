@@ -7,7 +7,7 @@ import { UserProfileComponent } from './profile/user-profile/user-profile.compon
 export const routes: Routes = [
 
     { path: 'login', component: LoginFormComponent },
-    { path: 'home', component: NewsfeedComponent },
+    { path: '', component: NewsfeedComponent },
     { path: 'register', component: RegisterFormComponent },
-    { path: 'profile/:userId', component: UserProfileComponent}
+    { path: ':username', component: UserProfileComponent}
 ];

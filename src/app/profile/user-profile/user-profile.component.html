@@ -6,8 +6,8 @@
         <div class="d-flex align-items-center mb-4">
           <img src="https://randomuser.me/api/portraits/men/8.jpg" class="rounded-circle me-3" width="80" height="80" alt="User avatar">
           <div>
-            <h4 class="mb-0">John Doe</h4>
-            <small class="text-muted">johndoe</small>
+            <h4 class="mb-0">{{userProfile.firstName}}</h4>
+            <small class="text-muted">{{userProfile.username}}</small>
             <p class="mt-2 mb-0">Software Developer at JitApp.</p>
           </div>
         </div>
@@ -23,7 +23,7 @@
             <small>Following</small>
           </div>
           <div>
-            <div class="fw-bold">3</div>
+            <div class="fw-bold">{{userProfile.newsfeedItems.length}}</div>
             <small>Jits</small>
           </div>
         </div>
@@ -33,27 +33,13 @@
         <!-- Latest Jits -->
         <h5 class="mb-3">Latest Jits</h5>
   
-        <div class="card mb-3">
+        <div class="card mb-3" *ngFor="let jit of userProfile.newsfeedItems">
           <div class="card-body">
-            <p class="card-text">Started using Angular Signals today. Impressed!</p>
-            <small class="text-muted">Apr 29, 2025, 10:30 AM</small>
+            <p id="jit-author">{{jit.authorFullName}}</p>
+            <p class="card-text">{{jit.content}}</p>
+            <small class="text-muted">{{jit.dateCreated | date: 'medium'}}</small>
           </div>
         </div>
-  
-        <div class="card mb-3">
-          <div class="card-body">
-            <p class="card-text">Backend API now supports pagination!</p>
-            <small class="text-muted">Apr 28, 2025, 4:10 PM</small>
-          </div>
-        </div>
-  
-        <div class="card mb-3">
-          <div class="card-body">
-            <p class="card-text">DevOps pipeline finally green 🟢</p>
-            <small class="text-muted">Apr 27, 2025, 8:45 PM</small>
-          </div>
-        </div>
-  
       </div>
     </div>
   </div>
