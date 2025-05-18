@@ -3,10 +3,11 @@ import { UserProfile } from '../model/userProfile';
 import { UserProfileService } from '../service/user-profile.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule],
+  imports: [CommonModule, OrderByDatePipe],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })

@@ -33,7 +33,7 @@
         <!-- Latest Jits -->
         <h5 class="mb-3">Latest Jits</h5>
   
-        <div class="card mb-3" *ngFor="let jit of userProfile.newsfeedItems">
+        <div class="card mb-3" *ngFor="let jit of userProfile.newsfeedItems | orderBydate: 'dateCreated':'desc'">
           <div class="card-body">
             <p id="jit-author">{{jit.authorFullName}}</p>
             <p class="card-text">{{jit.content}}</p>
