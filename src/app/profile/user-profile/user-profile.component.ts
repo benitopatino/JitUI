@@ -16,22 +16,30 @@ export class UserProfileComponent {
     firstName: '',
     lastName: '',
     username: '',
+    title: '',
+    avatarUrl: '',
+    bio: '',
+    city: '',
+    stateOrProvince: '',
+    country: '',
+    followeeCount: 0,
+    followerCount: 0,
     newsfeedItems: []
   };
 
-  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router){}
+  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     const username = this.route.snapshot.paramMap.get('username');
-    if(!username){
+    if (!username) {
       this.router.navigate(['/']);
       return;
     }
     this.userProfileService.getUserProfile(username)
       .subscribe(
         {
-          next:profile=>{this.userProfile = profile},
-          error: err=>{this.router.navigate(['/'])}
+          next: profile => { this.userProfile = profile },
+          error: err => { this.router.navigate(['/']) }
         }
       );
   }

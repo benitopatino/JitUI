@@ -4,22 +4,22 @@
         
         <!-- Profile Header -->
         <div class="d-flex align-items-center mb-4">
-          <img src="https://randomuser.me/api/portraits/men/8.jpg" class="rounded-circle me-3" width="80" height="80" alt="User avatar">
+          <img [src]="userProfile.avatarUrl" class="rounded-circle me-3" width="80" height="80" alt="User avatar">
           <div>
-            <h4 class="mb-0">{{userProfile.firstName}}</h4>
-            <small class="text-muted">{{userProfile.username}}</small>
-            <p class="mt-2 mb-0">Software Developer at JitApp.</p>
+            <h4 class="mb-0">{{userProfile.firstName}} {{userProfile.lastName}}</h4>
+            <small class="text-muted">&#64;{{userProfile.username}}</small>
+            <p class="mt-2 mb-0">{{userProfile.bio}}</p>
           </div>
         </div>
-  
+
         <!-- User Stats -->
         <div class="d-flex justify-content-around text-center mb-4">
           <div>
-            <div class="fw-bold">132</div>
+            <div class="fw-bold">{{userProfile.followerCount}}</div>
             <small>Followers</small>
           </div>
           <div>
-            <div class="fw-bold">87</div>
+            <div class="fw-bold">{{userProfile.followeeCount}}</div>
             <small>Following</small>
           </div>
           <div>
