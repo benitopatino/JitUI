@@ -19,26 +19,30 @@ export class RegisterFormComponent {
     firstname: '',
     lastname: '',
     email: '',
-    password:'',
+    password: '',
+    username: '',
+    city: '',
+    stateOrProvince: '',
+    country: '',
   }
 
-  constructor(private registerService: RegisterService, private router: Router){}
-  onSubmit(myForm: NgForm): void{
+  constructor(private registerService: RegisterService, private router: Router) { }
+  onSubmit(myForm: NgForm): void {
 
     // validate
-    
-    if(!myForm.valid)
+
+    if (!myForm.valid)
       return;
-    
+
     // call register service
 
     this.registerService.register(this.register)
       .subscribe({
-        next: (response: HttpResponse<any>)=>{
-          if(response.status == HttpStatusCode.Ok)
+        next: (response: HttpResponse<any>) => {
+          if (response.status == HttpStatusCode.Ok)
             this.router.navigate(['/login']);
         },
-        error: ()=>{
+        error: () => {
           myForm.resetForm();
           this.router.navigate(['/register'])
         }
