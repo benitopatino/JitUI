@@ -37,6 +37,10 @@ export class LoginService {
     });
   }
 
+  logout(): void{
+    localStorage.removeItem(LoginService.JitTokenSessionName);
+  }
+
 
   getToken(): string | null {
     return localStorage.getItem(LoginService.JitTokenSessionName);
