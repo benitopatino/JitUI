@@ -6,7 +6,9 @@
       </div>
       <h2 class="display-5 text-center mb-4"></h2>
       <form class="w-100" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+        
         <!-- First and Last Name Inline -->
+        
         <div class="row mb-3">
           <div class="col">
             <label for="firstName" class="form-label">First Name</label>
@@ -27,20 +29,52 @@
         </div>
 
         <!-- Email -->
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" [(ngModel)]="register.email" id="email" name="email" placeholder="example@example.com" #email="ngModel" required email>
-          <span class="text-danger"
-          *ngIf="(email.touched || myForm.submitted) && email.errors?.['required']">
-          Email is required
-        </span>
-        <span class="text-danger"
-        *ngIf="(email.invalid || myForm.submitted) && email.errors?.['email']">
-        Invalid email type
-      </span>
+        <div class="row mb-3"> 
+          <div class="col">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" [(ngModel)]="register.email" id="email" name="email" placeholder="example@example.com" #email="ngModel" required email>
+              <span class="text-danger"
+              *ngIf="(email.touched || myForm.submitted) && email.errors?.['required']">
+              Email is required
+            </span>
+            <span class="text-danger"
+              *ngIf="(email.invalid || myForm.submitted) && email.errors?.['email']">
+              Invalid email type
+            </span>
+          </div>
+          <div class="col">
+            <label for="username" class="form-label">username</label>
+            <input type="text" class="form-control" id="username" [(ngModel)]="register.username"  #username="ngModel" name="username" placeholder="bigchungus" required>
+            <span class="text-danger"
+            *ngIf="(username.touched || myForm.submitted) && username.errors?.['required']">
+            Username is required
+          </span>
+          </div>
+
+        </div>
+
+
+        <!-- Location -->
+
+        <div class="row mb-3">
+          <div class="col">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" [(ngModel)]="register.city" required name="city"  #city="ngModel" id="city" placeholder="Cupertino">
+          </div>
+          
+          <div class="col">
+            <label for="stateOrProvince" class="form-label">State</label>
+            <input type="text" class="form-control" [(ngModel)]="register.stateOrProvince" required name="stateOrProvince" #stateOrProvince="ngModel" id="stateOrProvince" placeholder="California">
+          </div>
+ 
+          <div class="col">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" [(ngModel)]="register.country" required name="country" #country="ngModel" id="country" placeholder="United States">
+          </div>
         </div>
 
         <!-- Password -->
+        
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input type="password" id="password" [(ngModel)]="register.password" name="password" class="form-control" required  minlength="6" #password="ngModel">
@@ -55,6 +89,7 @@
         </div>
 
         <!-- Submit Button -->
+        
         <div class="d-grid">
           <button type="submit" class="btn btn-primary">Register</button>
         </div>
