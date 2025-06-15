@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Login } from '../models/login';
 import { LoginService } from '../login-service/login.service';
@@ -20,6 +20,9 @@ export class LoginFormComponent {
     email: '',
     password: ''
   }
+
+  @ViewChild('passwordField') passwordField!: NgModel;
+
   unauthorized: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) { }
@@ -41,7 +44,9 @@ export class LoginFormComponent {
         },
         error: ()=>{
           this.unauthorized = true;
-            setTimeout(() => this.unauthorized = false, 10000); // hide after 5 sec
+          setTimeout(() => this.unauthorized = false, 10000); // hide after 5 sec
+          this.login.password = '';
+          this.passwordField.reset();
         }
       });
 
