@@ -4,10 +4,13 @@ import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
 import { NewsfeedService } from './newsfeed/service/newsfeed.service';
 import { RegisterFormComponent } from './register/register-form/register-form.component';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
+import { LogoutComponent } from './logout/logout.component';
 export const routes: Routes = [
 
     { path: 'login', component: LoginFormComponent },
-    { path: '', component: NewsfeedComponent },
     { path: 'register', component: RegisterFormComponent },
-    { path: ':username', component: UserProfileComponent}
+    { path: 'logout', component: LogoutComponent},
+    { path: '', component: NewsfeedComponent },
+    { path: ':username', component: UserProfileComponent},
+
 ];
