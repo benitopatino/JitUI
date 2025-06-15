@@ -7,6 +7,14 @@
 				<img src="assets/jitLogo.png" class="mx-auto d-block" width="150" height="150" alt="logo"/>
 			</div>
 		<h2 class="display-5 text-center mb-4">Login</h2>
+
+		@if(unauthorized)
+		{
+			<div class="alert alert-danger" role="alert">
+				Incorrect email or password. Please try again.
+			</div>
+		}
+		
 		<form #myForm="ngForm" class="w-100" (ngSubmit)="onSubmit(myForm)">
 		
 			<!-- Email -->

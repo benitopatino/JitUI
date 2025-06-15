@@ -20,6 +20,7 @@ export class LoginFormComponent {
     email: '',
     password: ''
   }
+  unauthorized: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) { }
 
@@ -37,11 +38,10 @@ export class LoginFormComponent {
             localStorage.setItem(LoginService.JitTokenSessionName, response.body.token);
             this.router.navigate(['/home'])
           }
-
         },
         error: ()=>{
-          myForm.resetForm();
-          this.router.navigate(['/login'])
+          this.unauthorized = true;
+            setTimeout(() => this.unauthorized = false, 10000); // hide after 5 sec
         }
       });
 
