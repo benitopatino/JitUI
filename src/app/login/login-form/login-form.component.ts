@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Login } from '../models/login';
 import { LoginService } from '../login-service/login.service';
@@ -21,6 +21,10 @@ export class LoginFormComponent {
     password: ''
   }
 
+  @ViewChild('passwordField') passwordField!: NgModel;
+
+  unauthorized: boolean = false;
+
   constructor(private loginService: LoginService, private router: Router) { }
 
   onSubmit(myForm: NgForm): void {
@@ -37,11 +41,12 @@ export class LoginFormComponent {
             localStorage.setItem(LoginService.JitTokenSessionName, response.body.token);
             this.router.navigate(['/home'])
           }
-
         },
         error: ()=>{
-          myForm.resetForm();
-          this.router.navigate(['/login'])
+          this.unauthorized = true;
+          setTimeout(() => this.unauthorized = false, 10000); // hide after 5 sec
+          this.login.password = '';
+          this.passwordField.reset();
         }
       });
 
