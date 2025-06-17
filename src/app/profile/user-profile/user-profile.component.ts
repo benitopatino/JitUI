@@ -32,16 +32,25 @@ export class UserProfileComponent {
   ngOnInit(): void {
     const username = this.route.snapshot.paramMap.get('username');
     if (!username) {
-      this.router.navigate(['/']);
-      return;
+      this.userProfileService.getOwnProfile()
+        .subscribe(
+          {
+            next: profile => { this.userProfile = profile },
+            error: err => { this.router.navigate(['/']) }
+          }
+        );
     }
-    this.userProfileService.getUserProfile(username)
-      .subscribe(
-        {
-          next: profile => { this.userProfile = profile },
-          error: err => { this.router.navigate(['/']) }
-        }
-      );
+    else
+    {
+      this.userProfileService.getUserProfile(username)
+        .subscribe(
+          {
+            next: profile => { this.userProfile = profile },
+            error: err => { this.router.navigate(['/']) }
+          }
+        );
+    }
+
   }
 
 }

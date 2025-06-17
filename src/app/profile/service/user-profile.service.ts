@@ -12,4 +12,8 @@ export class UserProfileService {
   getUserProfile(username: string): Observable<UserProfile> {
     return this.http.get<UserProfile>(this.API_URL + `${username}`);
   }
+
+   getOwnProfile(): Observable<UserProfile> {
+    return this.http.get<UserProfile>(this.API_URL);
+  }
 }
