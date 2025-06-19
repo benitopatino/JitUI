@@ -4,7 +4,7 @@ import { LoginService } from '../login/login-service/login.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink,RouterOutlet, CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
