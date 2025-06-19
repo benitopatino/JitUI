@@ -45,13 +45,7 @@ export class LoginService {
   isAuthenticated(): boolean {
     let token: string | null = localStorage.getItem(LoginService.JitTokenSessionName);
     if (token)
-    {
-      console.log(this.jwtService.decodeToken(token));
-      console.log(this.jwtService.isTokenExpired(token));
-    }
-
-
-
+      return !this.jwtService.isTokenExpired(token);
     return false;
   }
 
