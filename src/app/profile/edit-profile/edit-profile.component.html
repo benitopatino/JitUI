@@ -1,1 +1,38 @@
-<p>edit-profile works!</p>
+<div class="container d-flex align-items-center">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6 col-lg-5 mx-auto">
+            <h2>Edit Profile</h2>
+            <form #editForm="ngForm" (ngSubmit)="onSubmit()" class="w-100">
+                <!-- Title -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="title" [(ngModel)]="userProfile.title" class="form-control" />
+                </div>
+
+                <!-- City -->
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" id="city" name="city" [(ngModel)]="userProfile.city" class="form-control" />
+                </div>
+
+                <!-- State or Province -->
+                <div class="mb-3">
+                    <label for="stateOrProvince" class="form-label">State/Province</label>
+                    <input type="text" id="stateOrProvince" name="stateOrProvince"
+                        [(ngModel)]="userProfile.stateOrProvince" class="form-control" />
+                </div>
+
+                <!-- Country -->
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" id="country" name="country" [(ngModel)]="userProfile.country"
+                        class="form-control" />
+                </div>
+              <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">
+                <i class="bi bi-save me-1"></i> Save Changes
+            </button>
+            </form>
+        </div>
+    </div>
+</div>
