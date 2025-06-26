@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { UserProfile } from '../model/userProfile';
 import { UserProfileService } from '../service/user-profile.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule, OrderByDatePipe],
+  imports: [CommonModule, OrderByDatePipe, RouterLink],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })

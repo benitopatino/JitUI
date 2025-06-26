@@ -12,7 +12,7 @@
               <h4 class="mb-0">{{userProfile.firstName}} {{userProfile.lastName}}</h4>
               <small class="text-muted">&#64;{{userProfile.username}}</small>
             </div>
-            <button class="btn btn-secondary">
+            <button class="btn btn-secondary" [routerLink]="['/settings/profile']" >
               <i class="bi bi-pencil-square"></i> Edit Profile
             </button>
           </div>
