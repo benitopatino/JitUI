@@ -41,7 +41,7 @@ export class EditProfileComponent {
         .subscribe({
           next: (response: HttpResponse<any>)=>{
             if(response.status == HttpStatusCode.Ok)
-              this.router.navigate(['/']);
+              this.router.navigate(['/profile']);
           },
           error: (err) =>{
             console.log(err);
