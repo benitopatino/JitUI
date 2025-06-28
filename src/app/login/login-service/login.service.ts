@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Login } from '../models/login';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthResponse } from '../models/auth-response';
 import { LoginDTO } from '../models/loginDTO';
 const httpOptions = {
@@ -24,7 +25,7 @@ export class LoginService {
 
   private API_URL: string = 'http://localhost:5073/api/auth/login'
   static readonly JitTokenSessionName: string = 'jitAuthToken';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private jwtService: JwtHelperService) { }
 
   login(login: Login): Observable<HttpResponse<AuthResponse>> {
     this.dto.username = login.email;
@@ -37,10 +38,16 @@ export class LoginService {
     });
   }
 
-  logout(): void{
+  logout(): void {
     localStorage.removeItem(LoginService.JitTokenSessionName);
   }
 
+  isAuthenticated(): boolean {
+    let token: string | null = localStorage.getItem(LoginService.JitTokenSessionName);
+    if (token)
+      return !this.jwtService.isTokenExpired(token);
+    return false;
+  }
 
   getToken(): string | null {
     return localStorage.getItem(LoginService.JitTokenSessionName);
