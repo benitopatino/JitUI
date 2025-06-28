@@ -16,7 +16,6 @@ export class EditProfileComponent {
     firstName: '',
     lastName: '',
     title: '',
-    avatarUrl: '',
     bio: '',
     city: '',
     stateOrProvince: '',
