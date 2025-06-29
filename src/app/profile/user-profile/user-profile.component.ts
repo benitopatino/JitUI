@@ -12,6 +12,7 @@ import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent {
+  showEditProfile: boolean = false;
   userProfile: UserProfile = {
     firstName: '',
     lastName: '',
@@ -31,6 +32,9 @@ export class UserProfileComponent {
 
   ngOnInit(): void {
     const username = this.route.snapshot.paramMap.get('username');
+
+    this.checkRoute(this.router.url);
+
     if (!username) {
       this.userProfileService.getOwnProfile()
         .subscribe(
@@ -51,6 +55,11 @@ export class UserProfileComponent {
         );
     }
 
+  }
+
+  private checkRoute(url: string): boolean
+  {
+    return this.showEditProfile = (url === '/profile');
   }
 
 }
