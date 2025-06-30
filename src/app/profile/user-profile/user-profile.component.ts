@@ -57,6 +57,11 @@ export class UserProfileComponent {
 
   }
 
+  followUnfollow()
+  {
+    console.log('clicked')
+  }
+
   private checkRoute(url: string): boolean
   {
     return this.showEditProfile = (url === '/profile');

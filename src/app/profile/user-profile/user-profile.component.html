@@ -15,6 +15,10 @@
             <button class="btn btn-secondary" *ngIf="showEditProfile" [routerLink]="['/settings/profile']" >
               <i class="bi bi-pencil-square"></i> Edit Profile
             </button>
+            <button type="button" class="btn btn-primary" (click)="followUnfollow()">
+              <i class="bi bi-person-add"></i>
+              Follow
+            </button>
           </div>
           <p class="lead mt-3">{{userProfile.title}}</p>
           <p class="mt-2 mb-0">{{userProfile.bio}}</p>
