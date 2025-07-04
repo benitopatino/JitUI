@@ -4,6 +4,7 @@ import { UserProfileService } from '../service/user-profile.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
+import { LoginService } from '../../login/login-service/login.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,6 +14,7 @@ import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
 })
 export class UserProfileComponent {
   showEditProfile: boolean = false;
+  showFollow: boolean = false;
   userProfile: UserProfile = {
     firstName: '',
     lastName: '',
@@ -28,12 +30,13 @@ export class UserProfileComponent {
     newsfeedItems: []
   };
 
-  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    const username = this.route.snapshot.paramMap.get('username');
+    const username:string | null = this.route.snapshot.paramMap.get('username');
 
     this.checkRoute(this.router.url);
+    this.showFollow = !this.isOwnProfile(username)
 
     if (!username) {
       this.userProfileService.getOwnProfile()
@@ -65,6 +68,14 @@ export class UserProfileComponent {
   private checkRoute(url: string): boolean
   {
     return this.showEditProfile = (url === '/profile');
+  }
+
+  private isOwnProfile(username: string | null): boolean{
+    const loggedInUser:string = this.loginService.getLoggedOnUser();
+    if(username){
+      return (username === loggedInUser);
+    }
+    return true;
   }
 
 }
