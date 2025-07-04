@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
 import { LoginService } from '../../login/login-service/login.service';
+import { FollowUserService } from '../../follows/service/follow-user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -30,7 +31,8 @@ export class UserProfileComponent {
     newsfeedItems: []
   };
 
-  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService, private followServer: FollowUserService) { }
+
 
   ngOnInit(): void {
     const username:string | null = this.route.snapshot.paramMap.get('username');
@@ -60,9 +62,13 @@ export class UserProfileComponent {
 
   }
 
-  followUnfollow()
+  followUnfollow(): void
   {
-    console.log('clicked')
+    this.followServer.follow(this.userProfile.username)
+      .subscribe({
+        next:res => console.log('RESULT: ' + res),
+        error: err => console.log('ERROR: ' + err)
+      });
   }
 
   private checkRoute(url: string): boolean

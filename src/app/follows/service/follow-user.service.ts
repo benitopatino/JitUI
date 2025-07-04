@@ -18,7 +18,7 @@ export class FollowUserService {
   constructor(private http: HttpClient) { }
 
   follow(username: string): Observable<HttpResponse<any>> {
-    return this.http.post<any>(this.API_URL + username, {
+    return this.http.post<any>((this.API_URL + username), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
