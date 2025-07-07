@@ -32,7 +32,7 @@ export class UserProfileComponent {
     newsfeedItems: []
   };
 
-  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService, private followService: FollowUserService) { }
 
   ngOnInit(): void {
     const username:string | null = this.route.snapshot.paramMap.get('username');
@@ -65,7 +65,7 @@ export class UserProfileComponent {
 
   followUnfollow(): void
   {
-    this.followServer.follow(this.userProfile.username)
+    this.followService.follow(this.userProfile.username)
       .subscribe({
         next:res => console.log('RESULT: ' + res),
         error: err => console.log('ERROR: ' + err)
