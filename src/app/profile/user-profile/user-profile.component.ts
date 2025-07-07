@@ -16,6 +16,7 @@ import { FollowUserService } from '../../follows/service/follow-user.service';
 export class UserProfileComponent {
   showEditProfile: boolean = false;
   showFollow: boolean = false;
+  isAlreadyFollowing: boolean = false;
   userProfile: UserProfile = {
     firstName: '',
     lastName: '',
@@ -31,14 +32,14 @@ export class UserProfileComponent {
     newsfeedItems: []
   };
 
-  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService, private followServer: FollowUserService) { }
-
+  constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
     const username:string | null = this.route.snapshot.paramMap.get('username');
 
     this.checkRoute(this.router.url);
     this.showFollow = !this.isOwnProfile(username)
+    this.isAlreadyFollowing = this.showFollow && !this.alreadyFollowing(username);
 
     if (!username) {
       this.userProfileService.getOwnProfile()
@@ -82,6 +83,24 @@ export class UserProfileComponent {
       return (username === loggedInUser);
     }
     return true;
+  }
+
+  private alreadyFollowing(username: string | null): boolean{
+    console.log('i am here')
+    if(username)
+    {
+      this.followService.getListOfFollowees()
+        .subscribe({
+          next: res => {
+            const followees: Array<string> = res.body;
+            const exists: boolean = followees.map(f => f.toLowerCase()).includes(username.toLowerCase());
+            return exists;
+          },
+          error: err => console.log('Errr: ' + err.error)
+        })
+    }
+
+    return false;
   }
 
 }
