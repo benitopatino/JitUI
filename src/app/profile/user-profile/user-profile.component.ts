@@ -39,7 +39,7 @@ export class UserProfileComponent {
 
     this.checkRoute(this.router.url);
     this.showFollow = !this.isOwnProfile(username)
-    this.isAlreadyFollowing = this.showFollow && !this.alreadyFollowing(username);
+    this.alreadyFollowing(username);
 
     if (!username) {
       this.userProfileService.getOwnProfile()
@@ -85,8 +85,7 @@ export class UserProfileComponent {
     return true;
   }
 
-  private alreadyFollowing(username: string | null): boolean{
-    console.log('i am here')
+  private alreadyFollowing(username: string | null): void{
     if(username)
     {
       this.followService.getListOfFollowees()
@@ -94,13 +93,16 @@ export class UserProfileComponent {
           next: res => {
             const followees: Array<string> = res.body;
             const exists: boolean = followees.map(f => f.toLowerCase()).includes(username.toLowerCase());
-            return exists;
+            this.isAlreadyFollowing = exists;
+
           },
-          error: err => console.log('Errr: ' + err.error)
+          error: err => {this.isAlreadyFollowing = false;}
         })
     }
+    else{
+      this.isAlreadyFollowing = false;
+    }
 
-    return false;
   }
 
 }

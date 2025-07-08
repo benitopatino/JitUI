@@ -16,8 +16,8 @@
               <i class="bi bi-pencil-square"></i> Edit Profile
             </button>
             <button type="button" class="btn btn-primary" *ngIf="showFollow" (click)="followUnfollow()">
-              <i class="bi bi-person-add"></i>
-              Follow
+              <i [ngClass]="isAlreadyFollowing && showFollow ? 'bi bi-person-check' : 'bi bi-person-add' "></i>
+              {{ isAlreadyFollowing && showFollow ? 'Following' : 'Follow' }}
             </button>
           </div>
           <p class="lead mt-3">{{userProfile.title}}</p>
