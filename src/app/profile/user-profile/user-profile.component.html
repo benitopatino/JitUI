@@ -15,7 +15,7 @@
             <button class="btn btn-secondary" *ngIf="showEditProfile" [routerLink]="['/settings/profile']" >
               <i class="bi bi-pencil-square"></i> Edit Profile
             </button>
-            <button type="button" class="btn btn-primary" *ngIf="showFollow" (click)="followUnfollow()">
+            <button type="button" [ngClass]="isAlreadyFollowing ? 'btn btn-secondary' : 'btn btn-primary' " *ngIf="showFollow" (click)="followUnfollow()">
               <i [ngClass]="isAlreadyFollowing && showFollow ? 'bi bi-person-check' : 'bi bi-person-add' "></i>
               {{ isAlreadyFollowing && showFollow ? 'Following' : 'Follow' }}
             </button>
