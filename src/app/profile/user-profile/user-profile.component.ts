@@ -65,11 +65,22 @@ export class UserProfileComponent {
 
   followUnfollow(): void
   {
-    this.followService.follow(this.userProfile.username)
-      .subscribe({
-        next:res => console.log('RESULT: ' + res),
-        error: err => console.log('ERROR: ' + err)
-      });
+    if(this.isAlreadyFollowing)
+    {
+         this.followService.unfollow(this.userProfile.username)
+        .subscribe({
+          next:res => {this.isAlreadyFollowing=false},
+          error: err => console.log('ERROR: ' + err)
+        });
+    }
+    else{
+      this.followService.follow(this.userProfile.username)
+        .subscribe({
+          next:res => {this.isAlreadyFollowing=true},
+          error: err => console.log('ERROR: ' + err)
+        });
+    }
+
   }
 
   private checkRoute(url: string): boolean
