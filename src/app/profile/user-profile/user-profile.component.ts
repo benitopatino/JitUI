@@ -35,7 +35,7 @@ export class UserProfileComponent {
   constructor(private userProfileService: UserProfileService, private route: ActivatedRoute, private router: Router, private loginService: LoginService, private followService: FollowUserService) { }
 
   ngOnInit(): void {
-    const username:string | null = this.route.snapshot.paramMap.get('username');
+    const username: string | null = this.route.snapshot.paramMap.get('username');
 
     this.checkRoute(this.router.url);
     this.showFollow = !this.isOwnProfile(username)
@@ -50,8 +50,7 @@ export class UserProfileComponent {
           }
         );
     }
-    else
-    {
+    else {
       this.userProfileService.getUserProfile(username)
         .subscribe(
           {
@@ -63,25 +62,23 @@ export class UserProfileComponent {
 
   }
 
-  followUnfollow(): void
-  {
-    if(this.isAlreadyFollowing)
-    {
-         this.followService.unfollow(this.userProfile.username)
+  followUnfollow(): void {
+    if (this.isAlreadyFollowing) {
+      this.followService.unfollow(this.userProfile.username)
         .subscribe({
-          next:res => {
-            this.isAlreadyFollowing=false;
+          next: res => {
+            this.isAlreadyFollowing = false;
             this.userProfile.followerCount--;
           },
           error: err => console.log('ERROR: ' + err)
         });
     }
-    else{
+    else {
       this.followService.follow(this.userProfile.username)
         .subscribe({
-          next:res => {
-            this.isAlreadyFollowing=true;
-            this.userProfile.followerCount+=;
+          next: res => {
+            this.isAlreadyFollowing = true;
+            this.userProfile.followerCount++;
           },
           error: err => console.log('ERROR: ' + err)
         });
@@ -89,22 +86,20 @@ export class UserProfileComponent {
 
   }
 
-  private checkRoute(url: string): boolean
-  {
+  private checkRoute(url: string): boolean {
     return this.showEditProfile = (url === '/profile');
   }
 
-  private isOwnProfile(username: string | null): boolean{
-    const loggedInUser:string = this.loginService.getLoggedOnUser();
-    if(username){
+  private isOwnProfile(username: string | null): boolean {
+    const loggedInUser: string = this.loginService.getLoggedOnUser();
+    if (username) {
       return (username === loggedInUser);
     }
     return true;
   }
 
-  private alreadyFollowing(username: string | null): void{
-    if(username)
-    {
+  private alreadyFollowing(username: string | null): void {
+    if (username) {
       this.followService.getListOfFollowees()
         .subscribe({
           next: res => {
@@ -113,10 +108,10 @@ export class UserProfileComponent {
             this.isAlreadyFollowing = exists;
 
           },
-          error: err => {this.isAlreadyFollowing = false;}
+          error: err => { this.isAlreadyFollowing = false; }
         })
     }
-    else{
+    else {
       this.isAlreadyFollowing = false;
     }
 
