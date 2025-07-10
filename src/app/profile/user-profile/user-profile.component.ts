@@ -69,14 +69,20 @@ export class UserProfileComponent {
     {
          this.followService.unfollow(this.userProfile.username)
         .subscribe({
-          next:res => {this.isAlreadyFollowing=false},
+          next:res => {
+            this.isAlreadyFollowing=false;
+            this.userProfile.followerCount--;
+          },
           error: err => console.log('ERROR: ' + err)
         });
     }
     else{
       this.followService.follow(this.userProfile.username)
         .subscribe({
-          next:res => {this.isAlreadyFollowing=true},
+          next:res => {
+            this.isAlreadyFollowing=true;
+            this.userProfile.followerCount+=;
+          },
           error: err => console.log('ERROR: ' + err)
         });
     }
