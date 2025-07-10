@@ -12,8 +12,12 @@
               <h4 class="mb-0">{{userProfile.firstName}} {{userProfile.lastName}}</h4>
               <small class="text-muted">&#64;{{userProfile.username}}</small>
             </div>
-            <button class="btn btn-secondary" [routerLink]="['/settings/profile']" >
+            <button class="btn btn-secondary" *ngIf="showEditProfile" [routerLink]="['/settings/profile']" >
               <i class="bi bi-pencil-square"></i> Edit Profile
+            </button>
+            <button type="button" [ngClass]="isAlreadyFollowing ? 'btn btn-secondary' : 'btn btn-primary' " *ngIf="showFollow" (click)="followUnfollow()">
+              <i [ngClass]="isAlreadyFollowing && showFollow ? 'bi bi-person-check' : 'bi bi-person-add' "></i>
+              {{ isAlreadyFollowing && showFollow ? 'Following' : 'Follow' }}
             </button>
           </div>
           <p class="lead mt-3">{{userProfile.title}}</p>

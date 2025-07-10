@@ -53,5 +53,15 @@ export class LoginService {
     return localStorage.getItem(LoginService.JitTokenSessionName);
   }
 
+  getLoggedOnUser(): string {
+    let token: string | null = localStorage.getItem(LoginService.JitTokenSessionName);
+    if(token)
+    {
+      let decodedToken = this.jwtService.decodeToken(token);
+      return decodedToken.username;
+    }
+    else
+      return '';
+  }
 
 }
