@@ -21,17 +21,45 @@
   <div class="collapse navbar-collapse justify-content-between" id="jitNavbar">
     <!-- Center: Search Bar -->
     <form class="d-flex mx-auto my-2 my-lg-0" style="max-width: 250px;">
-      <div class="input-group input-group-sm w-100">
-        <span class="input-group-text bg-white border-end-0">
-          <i class="bi bi-search text-muted"></i>
-        </span>
-        <input
-          type="search"
-          class="form-control form-control-sm border-start-0"
-          placeholder="Search"
-          aria-label="Search"
-        />
+<div class="position-relative w-100">
+  <div class="input-group input-group-sm">
+    <span class="input-group-text bg-white border-end-0">
+      <i class="bi bi-search text-muted"></i>
+    </span>
+    <input
+      type="search"
+      name="searchQuery"
+      class="form-control form-control-sm border-start-0"
+      placeholder="Search"
+      aria-label="Search"
+      [(ngModel)]="searchQuery"
+      [ngModelOptions]="{ standalone: true }" 
+      (input)="onSearch()"
+      (focus)="isFocused = true"
+      (blur)="onBlur()"
+    />
+  </div>
+
+  <div
+    *ngIf="results?.length && isFocused"
+    class="position-absolute bg-white shadow-sm border rounded mt-1 w-100 z-3"
+    style="max-height: 300px; overflow-y: auto;"
+  >
+    <div
+      *ngFor="let item of results"
+      class="px-3 py-2 border-bottom small searchUserResult"
+      (mousedown)="selectResult(item)"
+    >
+      <div class="d-flex justify-content-start align-items-center gap-0">
+        <img [src]="item.avatarUrl" width="80" height="80" alt="User avatar" id="searchAvatarImg">
+        <div class="d-flex flex-column ms-2"> <!-- Optional margin for spacing -->
+          <p class="mb-0">{{ item.firstName + ' ' + item.lastName }}</p>
+          <p class="fw-bold mb-0">{{ item.username }}</p>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
     </form>
 
     <!-- Right: User icon and Logout -->
