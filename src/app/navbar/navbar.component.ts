@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginService } from '../login/login-service/login.service';
 import { CommonModule } from '@angular/common';
 import { UserProfile } from '../profile/model/userProfile';
@@ -19,14 +19,13 @@ export class NavbarComponent {
   isFocused = false;
   blurTimeout: any;
 
-  constructor(public loginService: LoginService, private userProfileService: UserProfileService){}
+  constructor(public loginService: LoginService, private userProfileService: UserProfileService, private router: Router){}
 
   onSearch(){
-    console.log(this.searchQuery)
     this.userProfileService.searchUserProfiles(this.searchQuery)
     .subscribe(     {
             next: (res) => {this.results = res},
-            error: err => { console.log("erersr")}
+            error: err => { console.log(err)}
           })
   }
   onBlur() {
@@ -35,8 +34,8 @@ export class NavbarComponent {
 }
 
 selectResult(item: UserProfileSearchDTO) {
-  // Navigate to user profile, etc.
-  console.log('Selected:', item);
+  this.searchQuery = '';  
+  this.router.navigate(['/' + item.username]);
   clearTimeout(this.blurTimeout);
   this.isFocused = false;
 }
