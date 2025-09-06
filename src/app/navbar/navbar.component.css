@@ -1,0 +1,9 @@
+#searchAvatarImg{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.searchUserResult:hover{
+    background-color: #fad3b6;
+}

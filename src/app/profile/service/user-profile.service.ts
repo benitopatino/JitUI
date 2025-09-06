@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Observable } from 'rxjs';
 import { UserProfile } from '../model/userProfile';
 import { EditUserProfileDto } from '../model/editUserProfileDto';
+import { UserProfileSearchDTO } from '../model/userProfileSearchDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +20,7 @@ const httpOptions = {
 
 export class UserProfileService {
   private API_URL: string = 'http://localhost:5073/api/user/profile/'
+  private API_SEARCH: string = 'http://localhost:5073/api/user/search/'
   constructor(private http: HttpClient) { }
 
   getUserProfile(username: string): Observable<UserProfile> {
@@ -38,4 +40,11 @@ export class UserProfileService {
     });
   
   }
+
+  searchUserProfiles(search: string)
+  {
+      const params = new HttpParams().set('searchQuery', search);
+  return this.http.get<UserProfileSearchDTO[]>(this.API_SEARCH, { params });
+  }
+
 }
