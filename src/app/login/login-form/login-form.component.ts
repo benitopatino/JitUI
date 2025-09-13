@@ -7,10 +7,11 @@ import { NewsfeedService } from '../../newsfeed/service/newsfeed.service';
 import { CommonModule } from '@angular/common';
 import { HttpStatusCode, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
 })
