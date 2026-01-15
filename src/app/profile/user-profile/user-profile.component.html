@@ -47,10 +47,13 @@
       <h5 class="mb-3">Latest Jits</h5>
 
       <div class="card mb-3" *ngFor="let jit of userProfile.newsfeedItems | orderBydate: 'dateCreated':'desc'">
-        <div class="card-body">
-          <p id="jit-author">{{jit.authorFullName}}</p>
-          <p class="card-text">{{jit.content}}</p>
-          <small class="text-muted">{{jit.dateCreated | date: 'medium'}}</small>
+        <div class="card-body d-flex align-items-start">
+          <img src="{{userProfile.avatarUrl}}" class="rounded-circle me-3" width="50" height="50" alt="Avatar">
+          <div>
+            <p id="jit-author">{{jit.authorFullName}}</p>
+            <p class="card-text">{{jit.content}}</p>
+            <small class="text-muted">{{jit.dateCreated | date: 'medium'}}</small>
+          </div>
         </div>
       </div>
     </div>
