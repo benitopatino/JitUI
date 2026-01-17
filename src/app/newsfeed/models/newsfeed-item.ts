@@ -5,5 +5,6 @@ export interface NewsfeedItem {
 	dateCreated: Date,
 	authorUserId: string,
 	authorFullName: string,
-	avatarUrl?:string
+	avatarUrl?:string,
+	userName: string
 }
