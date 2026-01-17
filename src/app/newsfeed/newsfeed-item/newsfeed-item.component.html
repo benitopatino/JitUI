@@ -4,7 +4,7 @@
 
 			<img src="{{newsfeedItem.avatarUrl}}" class="rounded-circle me-3 cursor-pointer" (mousedown)="selectResult(newsfeedItem.userName)" width="50" height="50" alt="Avatar">
 			<div>
-				<p class="card-subtitle text-muted">{{newsfeedItem.authorFullName.toUpperCase()}}</p>
+				<p class="card-subtitle text-muted cursor-pointer" (mousedown)="selectResult(newsfeedItem.userName)" >{{newsfeedItem.authorFullName.toUpperCase()}}</p>
 				<p>{{newsfeedItem.content}}</p>
 				<p>{{ newsfeedItem.dateCreated | date: 'medium' }}</p>
 			</div>
